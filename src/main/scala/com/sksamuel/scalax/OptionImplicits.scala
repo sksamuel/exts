@@ -14,3 +14,7 @@ object OptionImplicits {
 object NonEmptyString {
   def apply(str: String): Option[String] = Option(str).filter(_.trim.nonEmpty)
 }
+
+object NonZeroInt {
+  def apply(long: Long): Option[Long] = Option(long).filter(_ != 0)
+}
