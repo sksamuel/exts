@@ -3,8 +3,10 @@ package com.sksamuel.scalax.concurrent
 import java.util.concurrent.{Executor, ExecutorService, TimeUnit}
 
 import scala.concurrent.duration.Duration
-import scala.concurrent.{Future, Promise}
+import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.util.{Failure, Success, Try}
+
+import scala.language.implicitConversions
 
 object ExecutorImplicits {
 
@@ -22,7 +24,7 @@ object ExecutorImplicits {
 
     def submit[T](thunk: => T): Future[T] = {
       val promise = Promise[T]()
-      executor.execute(new Runnable[T] {
+      executor.execute(new Runnable {
         override def run(): Unit = {
           promise.tryComplete(Try(thunk))
         }
@@ -32,7 +34,7 @@ object ExecutorImplicits {
 
     def submit[T](thunk: => Unit, result: T): Future[T] = {
       val promise = Promise[T]()
-      executor.execute(new Runnable[T] {
+      executor.execute(new Runnable {
         override def run(): Unit = {
           Try(thunk) match {
             case Success(_) => promise.trySuccess(result)
@@ -47,7 +49,7 @@ object ExecutorImplicits {
 
 object Futures {
   implicit class RichFuture[T](f: Future[T]) {
-    def mapall[S](successFn: T => S, failureFn: Throwable => S): Future[S] = {
+    def mapall[S](successFn: T => S, failureFn: Throwable => S)(implicit ex: ExecutionContext): Future[S] = {
       val promise = Promise[S]()
       f.andThen {
         case Success(t) => successFn(t)
