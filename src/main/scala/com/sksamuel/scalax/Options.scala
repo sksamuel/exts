@@ -1,4 +1,4 @@
-package com.sksamuel.scalax.jdbc
+package com.sksamuel.scalax
 
 object Options {
 
