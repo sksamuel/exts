@@ -3,10 +3,9 @@ package com.sksamuel.scalax.concurrent
 import java.util.concurrent.{Executor, ExecutorService, TimeUnit}
 
 import scala.concurrent.duration.Duration
-import scala.concurrent.{ExecutionContext, Future, Promise}
-import scala.util.{Failure, Success, Try}
-
+import scala.concurrent.{Future, Promise}
 import scala.language.implicitConversions
+import scala.util.{Failure, Success, Try}
 
 object ExecutorImplicits {
 
