@@ -3,7 +3,7 @@ package com.sksamuel.scalax.concurrent
 import java.util.concurrent.{Executor, ExecutorService, TimeUnit}
 
 import scala.concurrent.duration.Duration
-import scala.concurrent.{Future, Promise}
+import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.language.implicitConversions
 import scala.util.{Failure, Success, Try}
 
@@ -44,5 +44,17 @@ object ExecutorImplicits {
       promise.future
     }
   }
+}
+
+object ExecutionContextImplicits {
+
+  implicit class RichExecutionContext(executor: ExecutionContext) {
+    def execute(thunk: => Unit): Unit = {
+      executor.execute(new Runnable {
+        override def run(): Unit = thunk
+      })
+    }
+  }
+
 }
 
