@@ -2,12 +2,12 @@ package com.sksamuel.scalax.collection
 
 import java.util.concurrent.BlockingQueue
 
-class BlockingQueueConcurrentIterator[E](queue: BlockingQueue[E]) extends Iterator[E] {
+case class BlockingQueueConcurrentIterator[E](queue: BlockingQueue[E], sentinel: E) extends Iterator[E] {
   private val iterator: Iterator[E] = {
     Iterator.continually(queue.take).takeWhile { e =>
-      if (e == null)
+      if (e == sentinel)
         queue.put(e)
-      e != null
+      e != sentinel
     }
   }
   override def hasNext: Boolean = iterator.hasNext
