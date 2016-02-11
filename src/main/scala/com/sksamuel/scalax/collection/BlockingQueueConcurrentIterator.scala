@@ -13,3 +13,5 @@ case class BlockingQueueConcurrentIterator[E](queue: BlockingQueue[E], sentinel:
   override def hasNext: Boolean = iterator.hasNext
   override def next(): E = iterator.next()
 }
+
+
