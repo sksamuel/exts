@@ -6,7 +6,7 @@ import scala.language.implicitConversions
 
 object ThreadImplicits {
 
-  implicit def toRunnable(thunk: => Unit): Runnable = new Runnable {
+  implicit def toRunnable(thunk: => Any): Runnable = new Runnable {
     override def run(): Unit = thunk
   }
 
