@@ -1,5 +1,7 @@
 package com.sksamuel.scalax
 
+import scala.language.implicitConversions
+
 object OptionImplicits {
 
   /**

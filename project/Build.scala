@@ -14,7 +14,7 @@ object Build extends Build {
   val rootSettings = Seq(
     organization := org,
     scalaVersion := ScalaVersion,
-    crossScalaVersions := Seq(ScalaVersion, "2.10.6"),
+    crossScalaVersions := Seq(ScalaVersion, "2.10.6", "2.12.0-M3"),
     publishMavenStyle := true,
     resolvers += Resolver.mavenLocal,
     publishArtifact in Test := false,
@@ -24,7 +24,6 @@ object Build extends Build {
     sbtrelease.ReleasePlugin.autoImport.releasePublishArtifactsAction := PgpKeys.publishSigned.value,
     sbtrelease.ReleasePlugin.autoImport.releaseCrossBuild := true,
     libraryDependencies ++= Seq(
-      "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2",
       "org.scalatest"         %% "scalatest"       % ScalatestVersion % "test",
       "org.slf4j"             % "slf4j-log4j12"    % Slf4jVersion % "test",
       "log4j"                 % "log4j"            % Log4jVersion % "test"
