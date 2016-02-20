@@ -24,9 +24,10 @@ object Build extends Build {
     sbtrelease.ReleasePlugin.autoImport.releasePublishArtifactsAction := PgpKeys.publishSigned.value,
     sbtrelease.ReleasePlugin.autoImport.releaseCrossBuild := true,
     libraryDependencies ++= Seq(
-      "org.scalatest"         %% "scalatest"       % ScalatestVersion % "test",
-      "org.slf4j"             % "slf4j-log4j12"    % Slf4jVersion % "test",
-      "log4j"                 % "log4j"            % Log4jVersion % "test"
+      "org.slf4j"                 % "slf4j-api"        % "1.7.16",
+      "org.scalatest"             %% "scalatest"       % ScalatestVersion % "test",
+      "org.slf4j"                 % "slf4j-log4j12"    % Slf4jVersion     % "test",
+      "log4j"                     % "log4j"            % Log4jVersion     % "test"
     ),
     publishTo <<= version {
       (v: String) =>
