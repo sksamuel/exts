@@ -13,14 +13,16 @@ class BoundedThreadPoolExecutor(poolSize: Int, queueSize: Int)
   val semaphore = new Semaphore(poolSize + queueSize)
   val running = new AtomicBoolean(true)
 
-  def execute(task: => Any) {
+  def execute(task: => Any): Unit = execute(new Runnable {
+    override def run(): Unit = task
+  })
+
+  override def execute(runnable: Runnable): Unit = {
     while (running.get) {
       try {
         semaphore.acquire()
         try {
-          super.execute(new Runnable {
-            override def run(): Unit = task
-          })
+          super.execute(runnable)
         } catch {
           case e: RejectedExecutionException =>
             semaphore.release()
