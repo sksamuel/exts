@@ -3,7 +3,7 @@ package com.sksamuel.scalax.concurrent
 import java.util.concurrent.{Executor, Semaphore}
 import ThreadImplicits.toRunnable
 
-class BoundexExecutor(executor: Executor, bound: Int) {
+class BoundedExecutor(executor: Executor, bound: Int) {
   val semaphore = new Semaphore(bound)
   def submit(thunk: => Any): Unit = {
     try {
