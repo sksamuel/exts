@@ -18,19 +18,23 @@ class BoundedThreadPoolExecutor(poolSize: Int, queueSize: Int)
   })
 
   override def execute(runnable: Runnable): Unit = {
-    while (running.get) {
+
+    var acquired = false
+    while (running.get && !acquired) {
       try {
         semaphore.acquire()
-        try {
-          super.execute(runnable)
-        } catch {
-          case e: RejectedExecutionException =>
-            semaphore.release()
-            throw e;
-        }
+        acquired = true
       } catch {
         case e: InterruptedException =>
       }
+    }
+
+    try {
+      super.execute(runnable)
+    } catch {
+      case e: RejectedExecutionException =>
+        semaphore.release()
+        throw e;
     }
   }
 
