@@ -32,4 +32,8 @@ trait JdbcSupport {
         throw e
     }
   }
+
+  implicit class RichConnection(conn: Connection) {
+    def apply[T](f: Connection => T): T = withCommit(conn)(f)
+  }
 }
