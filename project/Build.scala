@@ -14,7 +14,7 @@ object Build extends Build {
   val rootSettings = Seq(
     organization := org,
     scalaVersion := ScalaVersion,
-    crossScalaVersions := Seq(ScalaVersion, "2.10.6", "2.12.0-M3"),
+    crossScalaVersions := Seq(ScalaVersion, "2.10.6", "2.12.0-M4"),
     publishMavenStyle := true,
     resolvers += Resolver.mavenLocal,
     publishArtifact in Test := false,
@@ -24,10 +24,13 @@ object Build extends Build {
     sbtrelease.ReleasePlugin.autoImport.releasePublishArtifactsAction := PgpKeys.publishSigned.value,
     sbtrelease.ReleasePlugin.autoImport.releaseCrossBuild := true,
     libraryDependencies ++= Seq(
-      "org.slf4j"                 % "slf4j-api"        % "1.7.16",
-      "org.scalatest"             %% "scalatest"       % ScalatestVersion % "test",
-      "org.slf4j"                 % "slf4j-log4j12"    % Slf4jVersion     % "test",
-      "log4j"                     % "log4j"            % Log4jVersion     % "test"
+      "org.slf4j"                 % "slf4j-api"           % "1.7.16",
+      "org.json4s"                %% "json4s-native"      % "3.4.0",
+      "org.scala-lang"            % "scala-reflect"       % scalaVersion.value,
+      "org.scalatest"             %% "scalatest"          % ScalatestVersion % "test",
+      "org.slf4j"                 % "slf4j-log4j12"       % Slf4jVersion     % "test",
+      "log4j"                     % "log4j"               % Log4jVersion     % "test",
+      "com.h2database"            % "h2"                  % "1.4.191"        % "test"
     ),
     publishTo <<= version {
       (v: String) =>

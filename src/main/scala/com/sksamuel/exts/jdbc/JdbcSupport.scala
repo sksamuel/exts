@@ -5,6 +5,7 @@ import java.sql.{Connection, DriverManager}
 import scala.util.control.NonFatal
 
 trait JdbcSupport {
+  outer =>
 
   def openConnection(url: String,
                      autoCommit: Boolean = true,
@@ -34,6 +35,6 @@ trait JdbcSupport {
   }
 
   implicit class RichConnection(conn: Connection) {
-    def apply[T](f: Connection => T): T = withCommit(conn)(f)
+    def withCommit[T](f: Connection => T): T = outer.withCommit(conn)(f)
   }
 }
