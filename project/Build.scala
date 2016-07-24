@@ -4,9 +4,9 @@ import sbt.Keys._
 
 object Build extends Build {
 
-  val org = "com.sksamuel.scalax"
+  val org = "com.sksamuel.exts"
 
-  val ScalaVersion = "2.11.7"
+  val ScalaVersion = "2.11.8"
   val ScalatestVersion = "3.0.0-M12"
   val Slf4jVersion = "1.7.12"
   val Log4jVersion = "1.2.17"
@@ -38,7 +38,7 @@ object Build extends Build {
           Some("releases" at nexus + "service/local/staging/deploy/maven2")
     },
     pomExtra := {
-      <url>https://github.com/sksamuel/scalax</url>
+      <url>https://github.com/sksamuel/exts</url>
         <licenses>
           <license>
             <name>MIT</name>
@@ -47,8 +47,8 @@ object Build extends Build {
           </license>
         </licenses>
         <scm>
-          <url>git@github.com:sksamuel/scalax.git</url>
-          <connection>scm:git@github.com:sksamuel/scalax.git</connection>
+          <url>git@github.com:sksamuel/exts.git</url>
+          <connection>scm:git@github.com:sksamuel/exts.git</connection>
         </scm>
         <developers>
           <developer>
@@ -60,8 +60,8 @@ object Build extends Build {
     }
   )
 
-  lazy val root = Project("scalax", file("."))
+  lazy val root = Project("exts", file("."))
     .settings(rootSettings: _*)
     .settings(publish := {})
-    .settings(name := "scalax")
+    .settings(name := "exts")
 }
