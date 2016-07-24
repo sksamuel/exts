@@ -1,6 +1,11 @@
 package com.sksamuel.exts.jdbc
 
+import java.io.StringReader
 import java.sql.ResultSet
+
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
+import com.fasterxml.jackson.module.scala.experimental.ScalaObjectMapper
 
 object ResultSetIterator {
 
@@ -19,33 +24,10 @@ object ResultSetIterator {
 
 object ResultSetMapper {
 
+  val mapper = new ObjectMapper with ScalaObjectMapper
+  mapper.registerModule(DefaultScalaModule)
+
   import scala.reflect.runtime.universe._
-
-  import org.json4s._
-  import org.json4s.native.JsonMethods._
-
-  implicit val format = org.json4s.DefaultFormats + new NumberSerializer() + new BooleanSerializer() + new DoubleSerializer()
-
-  class NumberSerializer extends CustomSerializer[Int](format => ( {
-    case JString(x) => x.toInt
-  }, {
-    case x: Int => JInt(x)
-  }: PartialFunction[Any, JValue]
-    ))
-
-  class DoubleSerializer extends CustomSerializer[Double](format => ( {
-    case JString(x) => x.toDouble
-  }: PartialFunction[JValue, Double], {
-    case x: Int => JInt(x)
-  }: PartialFunction[Any, JValue]
-    ))
-
-  class BooleanSerializer extends CustomSerializer[Boolean](format => ( {
-    case JString(x) => x == "true"
-  }, {
-    case x: Int => JBool(x == 1)
-  }: PartialFunction[Any, JValue]
-    ))
 
   def apply[T: TypeTag : Manifest](rs: ResultSet): Seq[T] = {
     ResultSetIterator(rs).map { rs =>
@@ -55,7 +37,7 @@ object ResultSetMapper {
         s""" "${symbol.name}" : "${rs.getString(k)}" """
       }
       val json = fields.mkString("{", ",", "}")
-      parse(json).extract[T]
+      mapper.readValue[T](new StringReader(json))
     }.toList
   }
 }
