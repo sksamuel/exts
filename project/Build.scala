@@ -25,7 +25,7 @@ object Build extends Build {
     sbtrelease.ReleasePlugin.autoImport.releaseCrossBuild := true,
     libraryDependencies ++= Seq(
       "org.slf4j"                     % "slf4j-api"                   % "1.7.16",
-      "com.fasterxml.jackson.module"  %% "jackson-module-scala"       % "2.8.0.rc2",
+      "com.sksamuel.scalafunc"        %% "scalafunc"                  % "0.11.0",
       "org.scala-lang"                % "scala-reflect"               % scalaVersion.value,
       "org.scalatest"                 %% "scalatest"                  % ScalatestVersion      % "test",
       "org.slf4j"                     % "slf4j-log4j12"               % Slf4jVersion          % "test",
