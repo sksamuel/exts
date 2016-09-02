@@ -26,6 +26,7 @@ object Build extends Build {
     libraryDependencies ++= Seq(
       "org.slf4j"                     % "slf4j-api"                   % "1.7.16",
       "org.scala-lang"                % "scala-reflect"               % scalaVersion.value,
+      "com.typesafe"                  % "config"                      % "1.3.0",
       "org.scalatest"                 %% "scalatest"                  % ScalatestVersion      % "test",
       "org.slf4j"                     % "slf4j-log4j12"               % Slf4jVersion          % "test",
       "log4j"                         % "log4j"                       % Log4jVersion          % "test",
