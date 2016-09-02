@@ -5,10 +5,12 @@ import org.scalatest.{FunSuite, Matchers}
 class ConfigLoaderTest extends FunSuite with Matchers {
 
   test("config should parse application after reference") {
+    sys.props.put(ConfigLoader.ConfigKey, "")
     ConfigLoader("test1").getString("foo.name") shouldBe "b"
   }
 
   test("config should parse cwd override field first") {
+    sys.props.put(ConfigLoader.ConfigKey, "")
     ConfigLoader("test2").getString("foo.x") shouldBe "c"
   }
 
