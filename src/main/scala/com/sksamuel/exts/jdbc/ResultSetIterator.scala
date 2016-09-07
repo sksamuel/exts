@@ -1,6 +1,5 @@
 package com.sksamuel.exts.jdbc
 
-import java.io.StringReader
 import java.sql.ResultSet
 
 object ResultSetIterator {
