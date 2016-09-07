@@ -7,6 +7,18 @@ import scala.util.control.NonFatal
 trait JdbcSupport {
   outer =>
 
+  def withConnection[T](url: String,
+                        autoCommit: Boolean = true,
+                        schema: String = null,
+                        catalog: String = null)(fn: Connection => T): T = {
+    val conn = openConnection(url, autoCommit, schema, catalog)
+    try {
+      fn(conn)
+    } finally {
+      conn.close()
+    }
+  }
+
   def openConnection(url: String,
                      autoCommit: Boolean = true,
                      schema: String = null,
