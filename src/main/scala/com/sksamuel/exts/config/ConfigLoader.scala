@@ -30,7 +30,7 @@ object ConfigLoader extends Logging {
     overConf.withFallback(envConf).withFallback(appConf).withFallback(refConf).resolve()
   }
 
-  def locateAndLoadOverrideConf(): Config = {
+  private def locateAndLoadOverrideConf(): Config = {
     val confFilename = "override.conf"
     val overrideConfPath = Paths.get(".").resolve(confFilename).toAbsolutePath
     if (overrideConfPath.toFile.exists) {
@@ -42,7 +42,7 @@ object ConfigLoader extends Logging {
     }
   }
 
-  def locateAndLoadEnvConf(env: String): Config = {
+  private def locateAndLoadEnvConf(env: String): Config = {
     val confFilename = s"$env.conf"
     // first place to look is in the users home folder
     val homeFolderConfFile = Paths.get(sys.props("user.home")).resolve(confFilename).toAbsolutePath
