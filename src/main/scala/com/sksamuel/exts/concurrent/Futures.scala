@@ -2,7 +2,8 @@ package com.sksamuel.exts.concurrent
 
 import java.util.concurrent.atomic.AtomicInteger
 
-import scala.concurrent.{ExecutionContext, Future, Promise}
+import scala.concurrent.duration._
+import scala.concurrent.{Await, ExecutionContext, Future, Promise}
 import scala.util.{Failure, Success}
 
 object Futures {
@@ -36,7 +37,10 @@ object Futures {
     })
   }
 
+  implicit val duration = Duration.Inf
+
   implicit class RichFuture[T](f: Future[T]) {
+
     def mapall[S](successFn: T => S, failureFn: Throwable => S)(implicit ex: ExecutionContext): Future[S] = {
       val promise = Promise[S]()
       f.andThen {
@@ -45,5 +49,7 @@ object Futures {
       }
       promise.future
     }
+
+    def await(implicit duration: Duration): T = Await.result(f, duration)
   }
 }
