@@ -21,7 +21,7 @@ object ConfigLoader extends Logging {
   val ConfigKey = "CONFIG_ENV"
   val LocalEnv = "LOCAL"
 
-  def apply(appName: String): Config = {
+  def apply(appName: String = "application"): Config = {
     val env = Option(sys.props(ConfigKey)).orElse(sys.env.get(ConfigKey)).getOrElse(LocalEnv)
     val appConf = ConfigFactory.parseResources(s"$appName.conf")
     val envConf = locateAndLoadEnvConf(env)
