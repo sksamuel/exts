@@ -1,6 +1,8 @@
 package com.sksamuel.exts.config
 
+import com.sksamuel.exts.collection.Maps
 import com.typesafe.config.Config
+
 import scala.collection.JavaConverters._
 
 trait ConfigSupport {
@@ -13,5 +15,7 @@ trait ConfigSupport {
     def getBooleanOrElse(path: String, or: String) = if (config.hasPath(path)) config.getBoolean(path) else or
     def getIntOrElse(path: String, or: String) = if (config.hasPath(path)) config.getInt(path) else or
     def getLongOrElse(path: String, or: String) = if (config.hasPath(path)) config.getLong(path) else or
+
+    def flattenMap: Map[String, AnyRef] = Maps.flatten(config.root().unwrapped().asScala.toMap)
   }
 }
