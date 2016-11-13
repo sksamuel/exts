@@ -14,7 +14,7 @@ object Build extends Build {
   val rootSettings = Seq(
     organization := org,
     scalaVersion := ScalaVersion,
-    crossScalaVersions := Seq(ScalaVersion, "2.11.8"),
+    crossScalaVersions := Seq(ScalaVersion, "2.11.8", "2.10.6"),
     publishMavenStyle := true,
     resolvers += Resolver.mavenLocal,
     publishArtifact in Test := false,
