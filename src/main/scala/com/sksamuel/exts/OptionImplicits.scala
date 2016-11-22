@@ -1,5 +1,7 @@
 package com.sksamuel.exts
 
+import java.nio.file.{Path, Paths}
+
 import scala.language.implicitConversions
 
 object OptionImplicits {
@@ -16,6 +18,10 @@ object OptionImplicits {
     def some: Option[String] = StringOption(str)
   }
 
+  implicit class RichPathOptionImplicits(path: Path) {
+    def some: Option[Path] = PathOption(path)
+  }
+
   def none[T]: Option[T] = None
 }
 
@@ -25,4 +31,10 @@ object StringOption {
 
 object NonZeroInt {
   def apply(long: Long): Option[Long] = Option(long).filter(_ != 0)
+}
+
+// wraps a path and if the path doesn't exist then we get a None
+object PathOption {
+  def apply(path: Path): Option[Path] = Option(path).filter(_.toFile.exists())
+  def apply(str: String): Option[Path] = apply(Paths.get(str))
 }
