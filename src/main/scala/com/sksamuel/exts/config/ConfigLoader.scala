@@ -24,9 +24,9 @@ import com.typesafe.config.{Config, ConfigFactory}
   *
   * The order of priority, highest at the top:
   * ./override.conf
-  * ./$env.conf or ~/$env.conf or classpath:$env.conf
-  * classpath:$application.conf
-  * classpath:$reference.conf (all reference.conf files on the classpath are merged into a single file)
+  * ./${env}.conf or ~/${env}.conf or classpath:${env}.conf
+  * classpath:${application}.conf
+  * classpath:reference.conf (all reference.conf files on the classpath are merged into a single file)
   */
 object ConfigLoader extends Logging {
 
@@ -66,8 +66,9 @@ object ConfigLoader extends Logging {
       logger.info(s"Loading ENV:$env config from $path")
       ConfigFactory.parseFile(path.toFile)
     }.getOrElse {
+      // 3rd place to look is the classpath
       logger.info(s"Loading ENV:$env config from classpath (if present)")
-      ConfigFactory.parseResources("/" + confFilename)
+      ConfigFactory.parseResources(confFilename)
     }
   }
 }
