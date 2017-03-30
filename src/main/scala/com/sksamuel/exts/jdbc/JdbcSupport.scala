@@ -38,15 +38,14 @@ trait JdbcSupport {
   }
 
   def withCommit[T](conn: Connection)(f: Connection => T): T = {
+    conn.setAutoCommit(false)
     try {
       val result = f(conn)
-      if (!conn.getAutoCommit)
-        conn.commit()
+      conn.commit()
       result
     } catch {
       case NonFatal(e) =>
-        if (!conn.getAutoCommit)
-          conn.rollback()
+        conn.rollback()
         throw e
     }
   }
