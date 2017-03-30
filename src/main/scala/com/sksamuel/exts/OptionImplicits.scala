@@ -6,6 +6,10 @@ import scala.language.implicitConversions
 
 object OptionImplicits {
 
+  implicit class RichOption[T](option: Option[T]) {
+    def getOrError(message: String): T = option.getOrElse(sys.error(message))
+  }
+
   /**
     * Better than Some(t) because that will return the inferred type as Some[T], but in a fold we probably want the
     * type inferred as Option[T]
