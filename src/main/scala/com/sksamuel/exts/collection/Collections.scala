@@ -27,6 +27,8 @@ object Collections {
         }
       }
     }
+
+    def mapBy[U](fn: T => U): Map[U, T] = seq.map { t => fn(t) -> t }.toMap
   }
 
   implicit class RichMap[K, V](map: Map[K, V]) {

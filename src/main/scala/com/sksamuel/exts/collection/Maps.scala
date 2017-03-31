@@ -14,4 +14,5 @@ object Maps {
     case (key, value: java.util.Map[String, V]) => flatten(value.asScala.toMap[String, V]).map { case (k, v) => s"$key$separator$k" -> v }
     case (key, value: V) => Map(key -> value)
   }
+
 }
