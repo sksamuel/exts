@@ -15,4 +15,25 @@ object Maps {
     case (key, value: V) => Map(key -> value)
   }
 
+  /**
+    * Given a java.util.Map[k, AnyRef], this method will return a scala.collection.immutable.Map[k, AnyRef]
+    * where each value has been transformed such that:
+    *  - if the value is also a java map, then it will be recursively converted into a scala map
+    *  - otherwise it will be returned as is
+    */
+  def deepAsScala[K](src: java.util.Map[K, AnyRef]): Map[K, AnyRef] = src.asScala.mapValues {
+    case map: java.util.Map[K, AnyRef] => deepAsScala(map)
+    case other => other
+  }.toMap
+
+  /**
+    * Given a scala.collection.immutable.Map[k, AnyRef], this method will return a java.util.Map[k, AnyRef]
+    * where each value has been transformed such that:
+    *  - if the value is also a scala map, then it will be recursively converted into a java map
+    *  - otherwise it will be returned as is
+    */
+  def deepAsJava[K](src: Map[K, AnyRef]): java.util.Map[K, AnyRef] = src.mapValues {
+    case map: Map[K, AnyRef] => deepAsJava(map)
+    case other => other
+  }.asJava
 }
