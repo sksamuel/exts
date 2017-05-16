@@ -1,4 +1,4 @@
-package com.sksamuel.exts
+package com.sksamuel.exts.ui
 
 case class SelectFilter(name: String, field: String, options: Seq[FilterOption])
 

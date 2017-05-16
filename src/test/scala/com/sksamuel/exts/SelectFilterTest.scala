@@ -1,5 +1,6 @@
 package com.sksamuel.exts
 
+import com.sksamuel.exts.ui.{FilterOption, SelectFilter}
 import org.scalatest.{FunSuite, Matchers}
 
 class SelectFilterTest extends FunSuite with Matchers {
