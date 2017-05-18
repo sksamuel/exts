@@ -24,6 +24,7 @@ import com.typesafe.config.{Config, ConfigFactory}
   * If no env is found, it will default to LOCAL.
   *
   */
+@deprecated("use ConfigResolver", "1.47.0")
 case class ConfigLoaderParams(overrideConfInUserHome: Boolean = true,
                               overrideConfInWorkingDir: Boolean = true,
                               envConfInWorkingDir: Boolean = true,
@@ -34,6 +35,7 @@ case class ConfigLoaderParams(overrideConfInUserHome: Boolean = true,
                               configEnvParameterName: String = "CONFIG_ENV",
                               overrideConfName: String = "override.conf")
 
+@deprecated("use ConfigResolver", "1.47.0")
 object ConfigLoader extends Logging {
 
   val ConfigKey = "CONFIG_ENV"
@@ -82,7 +84,7 @@ object ConfigLoader extends Logging {
     overrideconf.withFallback(envconf).withFallback(appconf).withFallback(refconf).resolve()
   }
 
-  @deprecated("use apply(params: ConfigLoaderParams)", "1.41.0")
+  @deprecated("use ConfigResolver", "1.47.0")
   def apply(appName: String = "application"): Config = {
 
     def locateAndLoadOverrideConf(name: String): Config = {

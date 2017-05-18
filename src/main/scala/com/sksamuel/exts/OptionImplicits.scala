@@ -23,7 +23,9 @@ object OptionImplicits {
   }
 
   implicit class RichPathOptionImplicits(path: Path) {
+    @deprecated
     def some: Option[Path] = PathOption(path)
+    def option: Option[Path] = PathOption(path)
   }
 
   def none[T]: Option[T] = None
