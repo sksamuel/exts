@@ -47,7 +47,7 @@ object ConfigResolver extends Logging {
     path.option.fold(ConfigFactory.empty)(it => ConfigFactory.parseFile(it.toFile))
   }
 
-  def apply(): Unit = {
+  def apply(): Config = {
     val refconf = ConfigFactory.defaultReference()
     val appconf = ConfigFactory.parseResources(AppConfFilename)
     loadOverrideConf().withFallback(loadEnvConf()).withFallback(appconf).withFallback(refconf)
