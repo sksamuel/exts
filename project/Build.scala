@@ -6,7 +6,7 @@ object Build extends Build {
 
   val org = "com.sksamuel.exts"
 
-  val ScalaVersion = "2.12.0"
+  val ScalaVersion = "2.11.11"
   val ScalatestVersion = "3.0.0"
   val Slf4jVersion = "1.7.12"
   val Log4jVersion = "1.2.17"
@@ -14,7 +14,7 @@ object Build extends Build {
   val rootSettings = Seq(
     organization := org,
     scalaVersion := ScalaVersion,
-    crossScalaVersions := Seq(ScalaVersion, "2.11.8", "2.10.6"),
+    crossScalaVersions := Seq("2.12.2", "2.11.11", "2.10.6"),
     publishMavenStyle := true,
     resolvers += Resolver.mavenLocal,
     publishArtifact in Test := false,
