@@ -35,19 +35,22 @@ object ConfigResolver extends Logging {
   private val userHome = Paths get System.getProperty("user.home")
   private val cwd = Paths.get(".")
 
-  private def loadEnvConf(): Config = {
-    val path = userHome.resolve(EnvConfFilename).toAbsolutePath
-    logger.info(s"Detecting env conf [$path]")
-    path.option.fold(ConfigFactory.empty)(it => ConfigFactory.parseFile(it.toFile))
-  }
+  def apply(log: Boolean = false): Config = {
 
-  private def loadOverrideConf(): Config = {
-    val path = cwd.resolve(OverrideFilename).toAbsolutePath
-    logger.info(s"Detecting override conf [$path]")
-    path.option.fold(ConfigFactory.empty)(it => ConfigFactory.parseFile(it.toFile))
-  }
+    def loadEnvConf(): Config = {
+      val path = userHome.resolve(EnvConfFilename).toAbsolutePath
+      if (log)
+        logger.info(s"Detecting env conf [$path]")
+      path.option.fold(ConfigFactory.empty)(it => ConfigFactory.parseFile(it.toFile))
+    }
 
-  def apply(): Config = {
+    def loadOverrideConf(): Config = {
+      val path = cwd.resolve(OverrideFilename).toAbsolutePath
+      if (log)
+        logger.info(s"Detecting override conf [$path]")
+      path.option.fold(ConfigFactory.empty)(it => ConfigFactory.parseFile(it.toFile))
+    }
+
     val refconf = ConfigFactory.defaultReference()
     val appconf = ConfigFactory.parseResources(AppConfFilename)
     loadOverrideConf().withFallback(loadEnvConf()).withFallback(appconf).withFallback(refconf)
