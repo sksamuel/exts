@@ -14,7 +14,9 @@ class Cancellable[T](task: => T) {
   }
 
   private val jf: FutureTask[T] = new FutureTask[T](callable) {
-    override def done(): Unit = promise.complete(Try(get()))
+    override def done(): Unit = {
+      promise.tryComplete(Try(get))
+    }
   }
 
   private val executor = Executors.newSingleThreadExecutor()
