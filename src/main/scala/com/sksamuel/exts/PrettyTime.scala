@@ -10,7 +10,7 @@ object PrettyTime {
     val seconds = abs.toSeconds % 60
     val secondsString = if (seconds < 10) s"0${seconds}s" else s"${seconds}s"
     val time = if (hours > 0) {
-      s"${hours}h:${minutes}m:$secondsString"
+      s"${hours}h:${if (minutes < 10) "0" + minutes else minutes}m:$secondsString"
     } else {
       s"${minutes}m:$secondsString"
     }
