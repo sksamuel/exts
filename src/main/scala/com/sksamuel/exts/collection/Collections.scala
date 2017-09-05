@@ -2,10 +2,13 @@ package com.sksamuel.exts.collection
 
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
+import com.sksamuel.exts.OptionImplicits._
 
 object Collections {
 
   implicit class RichSequence[T](seq: Seq[T]) {
+
+    def headOrError(msg: String): T = seq.headOption.getOrError(msg)
 
     def flatCollect[B](pf: PartialFunction[T, Seq[B]]): Seq[B] = {
       val builder = ListBuffer.empty[B]
