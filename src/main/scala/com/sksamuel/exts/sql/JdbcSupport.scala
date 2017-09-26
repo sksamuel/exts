@@ -7,6 +7,20 @@ import com.sksamuel.exts.jdbc.ResultSetIterator
 
 class JdbcSupport(connFn: () => Connection) extends Using {
 
+  def batchInsert[T](ts: Seq[T], sql: String, indexer: T => Seq[Any], batchSize: Int = 50): Seq[Int] = {
+    using(connFn()) { conn =>
+      val stmt = conn.prepareStatement(sql)
+      ts.grouped(batchSize).flatMap { batch =>
+        for (t <- batch) {
+          val params = indexer(t)
+          params.zipWithIndex.foreach { case (param, index) => stmt.setObject(index + 1, param) }
+          stmt.addBatch()
+        }
+        stmt.executeBatch()
+      }.toSeq
+    }
+  }
+
   def insert(sql: String, parameters: Seq[Any]): Int = {
     insert(
       sql,
