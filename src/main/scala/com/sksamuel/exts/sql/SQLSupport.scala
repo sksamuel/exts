@@ -11,6 +11,7 @@ class SQLSupport(connFn: () => Connection) extends Using {
     using(connFn()) { conn =>
       val stmt = conn.prepareStatement(sql)
       ts.grouped(batchSize).flatMap { batch =>
+        stmt.clearBatch()
         for (t <- batch) {
           val params = indexer(t)
           params.zipWithIndex.foreach { case (param, index) => stmt.setObject(index + 1, param) }
