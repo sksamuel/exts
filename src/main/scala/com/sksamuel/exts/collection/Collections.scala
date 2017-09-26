@@ -36,5 +36,7 @@ object Collections {
 
   implicit class RichMap[K, V](map: Map[K, V]) {
     def containsAll(keys: Seq[K]): Boolean = keys.forall(map.contains)
+
+    def getOrError(key: K, msg: String): V = map.getOrElse(key, sys.error(msg))
   }
 }
