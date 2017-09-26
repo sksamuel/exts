@@ -18,7 +18,7 @@ class SQLSupport(connFn: () => Connection) extends Using {
           stmt.addBatch()
         }
         stmt.executeBatch()
-      }.toSeq
+      }.toVector
     }
   }
 
