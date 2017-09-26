@@ -5,7 +5,7 @@ import java.sql.{Connection, PreparedStatement, ResultSet}
 import com.sksamuel.exts.io.Using
 import com.sksamuel.exts.jdbc.ResultSetIterator
 
-class JdbcSupport(connFn: () => Connection) extends Using {
+class SQLSupport(connFn: () => Connection) extends Using {
 
   def batchInsert[T](ts: Seq[T], sql: String, indexer: T => Seq[Any], batchSize: Int = 50): Seq[Int] = {
     using(connFn()) { conn =>
@@ -37,6 +37,8 @@ class JdbcSupport(connFn: () => Connection) extends Using {
       stmt.executeUpdate()
     }
   }
+
+  def query[T](sql: String, mapper: ResultSet => T): Seq[T] = query(sql, mapper)
 
   def query[T](sql: String, parameters: Seq[Any], mapper: ResultSet => T): Seq[T] = {
     query(
