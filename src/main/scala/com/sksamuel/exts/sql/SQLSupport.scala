@@ -7,7 +7,7 @@ import com.sksamuel.exts.jdbc.ResultSetIterator
 
 class SQLSupport(connFn: () => Connection) extends Using {
 
-  def batchInsert[T](ts: Seq[T], sql: String, indexer: T => Seq[Any], batchSize: Int = 50): Seq[Int] = {
+  def batchInsert[T](ts: Seq[T], sql: String, batchSize: Int = 50)(indexer: T => Seq[Any]): Seq[Int] = {
     using(connFn()) { conn =>
       val stmt = conn.prepareStatement(sql)
       ts.grouped(batchSize).flatMap { batch =>
