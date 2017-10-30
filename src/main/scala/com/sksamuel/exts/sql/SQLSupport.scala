@@ -39,19 +39,16 @@ class SQLSupport(connFn: () => Connection) extends Using {
     }
   }
 
-  def query[T](sql: String, mapper: ResultSet => T): Seq[T] = query(sql, Nil, mapper)
-
-  def query[T](sql: String, parameters: Seq[Any], mapper: ResultSet => T): Seq[T] = {
+  def query[T](sql: String, parameters: Seq[Any] = Nil)(mapper: ResultSet => T): Seq[T] = {
     query(
       sql,
       stmt => parameters.zipWithIndex.foreach { case (param, index) =>
         stmt.setObject(index + 1, param)
-      },
-      mapper
-    )
+      }
+    )(mapper)
   }
 
-  def query[T](sql: String, paramFn: PreparedStatement => Unit, mapper: ResultSet => T): Seq[T] = {
+  def query[T](sql: String, paramFn: PreparedStatement => Unit)(mapper: ResultSet => T): Seq[T] = {
     using(connFn()) { conn =>
       val stmt = conn.prepareStatement(sql)
       paramFn(stmt)
