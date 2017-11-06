@@ -5,7 +5,7 @@ import java.sql.{Connection, PreparedStatement, ResultSet}
 import com.sksamuel.exts.io.Using
 import com.sksamuel.exts.jdbc.ResultSetIterator
 
-class SQLSupport(connFn: () => Connection) extends Using {
+class SQLSupport(connFn: () => Connection, fetchSize: Int = 100) extends Using {
 
   def batchInsert[T](ts: Seq[T], sql: String, batchSize: Int = 50)(indexer: T => Seq[Any]): Seq[Int] = {
     using(connFn()) { conn =>
@@ -39,17 +39,16 @@ class SQLSupport(connFn: () => Connection) extends Using {
     }
   }
 
-  def query[T](sql: String, parameters: Seq[Any] = Nil, fetchSize: Int = 100)(mapper: ResultSet => T): Seq[T] = {
+  def query[T](sql: String, parameters: Seq[Any] = Nil)(mapper: ResultSet => T): Seq[T] = {
     query(
       sql,
       stmt => parameters.zipWithIndex.foreach { case (param, index) =>
         stmt.setObject(index + 1, param)
-      },
-      fetchSize
+      }
     )(mapper)
   }
 
-  def query[T](sql: String, paramFn: PreparedStatement => Unit, fetchSize: Int = 100)(mapper: ResultSet => T): Seq[T] = {
+  def query[T](sql: String, paramFn: PreparedStatement => Unit)(mapper: ResultSet => T): Seq[T] = {
     using(connFn()) { conn =>
       val stmt = conn.prepareStatement(sql)
       paramFn(stmt)
