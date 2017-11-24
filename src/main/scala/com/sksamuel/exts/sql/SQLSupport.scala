@@ -22,6 +22,13 @@ class SQLSupport(connFn: () => Connection, fetchSize: Int = 100) extends Using {
     }
   }
 
+  def insert(table: String, fields: Seq[String], parameters: Seq[Any]): Int = {
+    require(fields.size == parameters.size)
+    val v = List.fill(fields.size)("?").mkString(",")
+    val f = fields.mkString("`", "`,`", "`")
+    insert(s"insert into $table ($f) values ($v)", parameters)
+  }
+
   def insert(sql: String, parameters: Seq[Any]): Int = {
     insert(
       sql,
