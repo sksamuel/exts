@@ -65,6 +65,5 @@ object Build extends Build {
 
   lazy val root = Project("exts", file("."))
     .settings(rootSettings: _*)
-    .settings(publish := {})
     .settings(name := "exts")
 }
