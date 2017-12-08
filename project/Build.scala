@@ -44,8 +44,8 @@ object Build extends Build {
       <url>https://github.com/sksamuel/exts</url>
         <licenses>
           <license>
-            <name>MIT</name>
-            <url>https://opensource.org/licenses/MIT</url>
+            <name>Apache2.0</name>
+            <url>https://opensource.org/licenses/Apache-2.0</url>
             <distribution>repo</distribution>
           </license>
         </licenses>
