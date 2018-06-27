@@ -7,7 +7,7 @@ import org.scalatest.{FlatSpec, Matchers}
 
 class FileWatcherTest extends FlatSpec with Matchers {
 
-  "file watcher" should "notify on change" in {
+  "file watcher" should "notify on change" ignore {
     val dir = Files.createTempDirectory("filewatchertest")
     val latch1 = new CountDownLatch(1)
     val latch2 = new CountDownLatch(2)
