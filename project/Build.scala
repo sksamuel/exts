@@ -32,13 +32,12 @@ object Build extends Build {
       "log4j"                         % "log4j"                       % Log4jVersion          % "test",
       "com.h2database"                % "h2"                          % "1.4.191"             % "test"
     ),
-    publishTo <<= version {
-      (v: String) =>
-        val nexus = "https://oss.sonatype.org/"
-        if (v.trim.endsWith("SNAPSHOT"))
-          Some("snapshots" at nexus + "content/repositories/snapshots")
-        else
-          Some("releases" at nexus + "service/local/staging/deploy/maven2")
+    publishTo := {
+      val nexus = "https://oss.sonatype.org/"
+      if (version.value.trim.endsWith("SNAPSHOT"))
+        Some("snapshots" at nexus + "content/repositories/snapshots")
+      else
+        Some("releases" at nexus + "service/local/staging/deploy/maven2")
     },
     pomExtra := {
       <url>https://github.com/sksamuel/exts</url>
