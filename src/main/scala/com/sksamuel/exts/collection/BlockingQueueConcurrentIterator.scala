@@ -8,15 +8,15 @@ import java.util.concurrent.BlockingQueue
 // the iterator will put the sentinel back onto the queue so that any other iterators on the same source
 // queue can also detect it and terminate.
 case class BlockingQueueConcurrentIterator[E](queue: BlockingQueue[E], sentinel: E = null) extends Iterator[E] {
-  private val iterator: Iterator[E] = {
+  private val i: Iterator[E] = {
     Iterator.continually(queue.take).takeWhile { e =>
       if (e == sentinel)
         queue.put(e)
       e != sentinel
     }
   }
-  override def hasNext: Boolean = iterator.hasNext
-  override def next(): E = iterator.next()
+  override def hasNext: Boolean = i.hasNext
+  override def next(): E = i.next()
 }
 
 

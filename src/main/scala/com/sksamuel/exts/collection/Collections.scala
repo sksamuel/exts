@@ -12,7 +12,7 @@ object Collections {
 
     def flatCollect[B](pf: PartialFunction[T, Seq[B]]): Seq[B] = {
       val builder = ListBuffer.empty[B]
-      seq.foreach(pf.runWith(builder appendAll _))
+      seq.foreach(pf.runWith(builder ++= _))
       builder.result
     }
 
