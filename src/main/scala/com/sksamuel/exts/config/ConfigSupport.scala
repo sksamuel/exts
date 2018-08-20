@@ -12,8 +12,8 @@ trait ConfigSupport {
 
   implicit class RichConfig(config: Config) {
 
-    def getStringSeq(path: String): Seq[String] = if (config.hasPath(path)) config.getStringList(path).asScala else Nil
-    def getIntSeq(path: String): Seq[Int] = if (config.hasPath(path)) config.getIntList(path).asScala.map(_.toInt) else Nil
+    def getStringSeq(path: String): collection.Seq[String] = if (config.hasPath(path)) config.getStringList(path).asScala else Nil
+    def getIntSeq(path: String): collection.Seq[Int] = if (config.hasPath(path)) config.getIntList(path).asScala.map(_.toInt) else Nil
 
     def getStringOrElse(path: String, or: String): String = if (config.hasPath(path)) config.getString(path) else or
     def getDoubleOrElse(path: String, or: Double): Double = if (config.hasPath(path)) config.getDouble(path) else or

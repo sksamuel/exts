@@ -32,7 +32,7 @@ object Futures {
   def firstThrowableOf[T](futures: TraversableOnce[Future[T]])(implicit ex: ExecutionContext): Future[Option[Throwable]] = {
     // this turns all futures into futures of trys from which we can get the first failure
     val fs = futures.map { future => future.map(x => Success(x)).recover { case t => Failure(t) } }
-    Future.sequence(fs).map(_.collectFirst {
+    Future.sequence(fs.toSeq).map(_.collectFirst {
       case Failure(t) => t
     })
   }
