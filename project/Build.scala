@@ -6,15 +6,15 @@ object Build extends Build {
 
   val org = "com.sksamuel.exts"
 
-  val ScalaVersion = "2.11.11"
-  val ScalatestVersion = "3.0.0"
+  val ScalaVersion = "2.11.12"
+  val ScalatestVersion = "3.0.6-SNAP1"
   val Slf4jVersion = "1.7.12"
   val Log4jVersion = "1.2.17"
 
   val rootSettings = Seq(
     organization := org,
     scalaVersion := ScalaVersion,
-    crossScalaVersions := Seq("2.12.2", "2.11.11", "2.10.6"),
+    crossScalaVersions := Seq("2.13.0-M4", "2.12.6", "2.11.12", "2.10.7"),
     publishMavenStyle := true,
     resolvers += Resolver.mavenLocal,
     publishArtifact in Test := false,
@@ -32,13 +32,12 @@ object Build extends Build {
       "log4j"                         % "log4j"                       % Log4jVersion          % "test",
       "com.h2database"                % "h2"                          % "1.4.191"             % "test"
     ),
-    publishTo <<= version {
-      (v: String) =>
-        val nexus = "https://oss.sonatype.org/"
-        if (v.trim.endsWith("SNAPSHOT"))
-          Some("snapshots" at nexus + "content/repositories/snapshots")
-        else
-          Some("releases" at nexus + "service/local/staging/deploy/maven2")
+    publishTo := {
+      val nexus = "https://oss.sonatype.org/"
+      if (version.value.trim.endsWith("SNAPSHOT"))
+        Some("snapshots" at nexus + "content/repositories/snapshots")
+      else
+        Some("releases" at nexus + "service/local/staging/deploy/maven2")
     },
     pomExtra := {
       <url>https://github.com/sksamuel/exts</url>

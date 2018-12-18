@@ -35,5 +35,5 @@ object Maps {
   def deepAsJava[K](src: Map[K, AnyRef]): java.util.Map[K, AnyRef] = src.mapValues {
     case map: Map[K, AnyRef] => deepAsJava(map)
     case other => other
-  }.asJava
+  }.toMap.asJava
 }
