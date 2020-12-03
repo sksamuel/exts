@@ -1,7 +1,11 @@
+version: ~> 1.0
+import: scala/scala-dev:travis/default.yml
+
 language: scala
+env:
+  - ADOPTOPENJDK=8
+  - ADOPTOPENJDK=11
 scala:
-   - 2.11.12
-   - 2.12.6
-   - 2.13.0-M4
-jdk:
-  - oraclejdk8
+  - 2.11.12
+  - 2.12.12
+  - 2.13.4
