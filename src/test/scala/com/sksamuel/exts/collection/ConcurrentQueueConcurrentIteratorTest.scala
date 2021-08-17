@@ -2,12 +2,13 @@ package com.sksamuel.exts.collection
 
 import java.util.concurrent.ConcurrentLinkedQueue
 
-import org.scalatest.{Matchers, WordSpec}
 
 import scala.concurrent.duration._
 import scala.concurrent.{Await, Future}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class ConcurrentQueueConcurrentIteratorTest extends WordSpec with Matchers {
+class ConcurrentQueueConcurrentIteratorTest extends AnyWordSpec with Matchers {
 
   import scala.concurrent.ExecutionContext.Implicits.global
 

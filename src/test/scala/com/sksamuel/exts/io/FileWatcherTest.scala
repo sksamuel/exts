@@ -3,9 +3,10 @@ package com.sksamuel.exts.io
 import java.nio.file.{Files, Path}
 import java.util.concurrent.{CountDownLatch, TimeUnit}
 
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
-class FileWatcherTest extends FlatSpec with Matchers {
+class FileWatcherTest extends AnyFlatSpec with Matchers {
 
   "file watcher" should "notify on change" ignore {
     val dir = Files.createTempDirectory("filewatchertest")

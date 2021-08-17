@@ -2,9 +2,10 @@ package com.sksamuel.exts.concurrent
 
 import java.util.concurrent.atomic.AtomicBoolean
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class LifecycleTest extends WordSpec with Matchers {
+class LifecycleTest extends AnyWordSpec with Matchers {
 
   "Lifecycle" should {
     "block until notified" in {

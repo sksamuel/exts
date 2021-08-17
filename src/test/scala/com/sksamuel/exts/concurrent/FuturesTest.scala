@@ -1,11 +1,12 @@
 package com.sksamuel.exts.concurrent
 
-import org.scalatest.{Matchers, WordSpec}
 
 import scala.concurrent.{Await, Future}
 import scala.concurrent.duration._
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class FuturesTest extends WordSpec with Matchers {
+class FuturesTest extends AnyWordSpec with Matchers {
 
   import scala.concurrent.ExecutionContext.Implicits.global
 

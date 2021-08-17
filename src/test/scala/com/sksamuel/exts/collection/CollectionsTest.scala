@@ -1,8 +1,9 @@
 package com.sksamuel.exts.collection
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class CollectionsTest extends WordSpec with Matchers {
+class CollectionsTest extends AnyWordSpec with Matchers {
 
   import Collections._
 

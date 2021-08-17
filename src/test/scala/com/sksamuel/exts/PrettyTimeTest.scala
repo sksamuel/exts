@@ -1,9 +1,10 @@
 package com.sksamuel.exts
 
-import org.scalatest.{FunSuite, Matchers}
 import scala.concurrent.duration._
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
-class PrettyTimeTest extends FunSuite with Matchers {
+class PrettyTimeTest extends AnyFunSuite with Matchers {
 
   test("pretty time hour minute second combinations") {
     PrettyTime(70.seconds) shouldBe "1m:10s"

@@ -19,5 +19,5 @@ object SelectFilter {
 case class FilterOption(value: String, label: String)
 
 object FilterOption {
-  def apply[E <: Enum[E]](enum: E): FilterOption = FilterOption(enum.name, enum.name)
+  def apply[E <: Enum[E]](`enum`: E): FilterOption = FilterOption(`enum`.name, `enum`.name)
 }

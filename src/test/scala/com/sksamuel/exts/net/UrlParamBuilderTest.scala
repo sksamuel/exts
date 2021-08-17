@@ -1,8 +1,9 @@
 package com.sksamuel.exts.net
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class UrlParamBuilderTest extends WordSpec with Matchers {
+class UrlParamBuilderTest extends AnyWordSpec with Matchers {
 
   "UrlParamBuilder" should {
     "build urls with = and &" in {

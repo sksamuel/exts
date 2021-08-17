@@ -1,9 +1,10 @@
 package com.sksamuel.exts
 
 import com.sksamuel.exts.ui.{FilterOption, SelectFilter}
-import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
-class SelectFilterTest extends FunSuite with Matchers {
+class SelectFilterTest extends AnyFunSuite with Matchers {
 
   test("enums should fully populate from type") {
     SelectFilter[Suite] shouldBe

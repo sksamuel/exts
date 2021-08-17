@@ -1,9 +1,10 @@
 package com.sksamuel.exts.pagination
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 /** @author Stephen Samuel */
-class PagesTest extends WordSpec with Matchers {
+class PagesTest extends AnyWordSpec with Matchers {
 
   "Pages.hasNext" should {
     "be true when current < total pages" in {
