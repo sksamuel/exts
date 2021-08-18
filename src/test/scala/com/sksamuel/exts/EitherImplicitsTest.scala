@@ -1,8 +1,9 @@
 package com.sksamuel.exts
 
-import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
-class EitherImplicitsTest extends FunSuite with Matchers {
+class EitherImplicitsTest extends AnyFunSuite with Matchers {
 
   import EitherImplicits._
 

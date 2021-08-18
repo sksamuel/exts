@@ -37,7 +37,7 @@ object Futures {
     })
   }
 
-  implicit val duration = Duration.Inf
+  implicit val duration: Duration = Duration.Inf
 
   implicit class RichFuture[T](f: Future[T]) {
 

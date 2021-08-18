@@ -4,9 +4,10 @@ import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.locks.ReentrantLock
 import java.util.concurrent.{CountDownLatch, TimeUnit}
 
-import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
-class ThrottlerTest extends FunSuite with Matchers {
+class ThrottlerTest extends AnyFunSuite with Matchers {
 
   test("Throttler should not execute the thunk while the counter > 0") {
 

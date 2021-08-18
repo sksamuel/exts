@@ -2,12 +2,13 @@ package com.sksamuel.exts.collection
 
 import java.util.concurrent.LinkedBlockingQueue
 
-import org.scalatest.{Matchers, WordSpec}
 
 import scala.concurrent.duration._
 import scala.concurrent.{Await, Future}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class BlockingQueueConcurrentIteratorTest extends WordSpec with Matchers {
+class BlockingQueueConcurrentIteratorTest extends AnyWordSpec with Matchers {
 
   import scala.concurrent.ExecutionContext.Implicits.global
 

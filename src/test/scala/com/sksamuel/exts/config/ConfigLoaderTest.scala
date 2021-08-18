@@ -1,8 +1,9 @@
 package com.sksamuel.exts.config
 
-import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
-class ConfigLoaderTest extends FunSuite with Matchers {
+class ConfigLoaderTest extends AnyFunSuite with Matchers {
 
   test("config should parse application after reference") {
     sys.props.put(ConfigLoader.ConfigKey, "")

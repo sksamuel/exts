@@ -1,8 +1,9 @@
 package com.sksamuel.exts.pagination
 
-import org.scalatest.{WordSpec, Matchers}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class PageTest extends WordSpec with Matchers {
+class PageTest extends AnyWordSpec with Matchers {
 
   "Page.next" should {
     "return page + 1" in {

@@ -2,11 +2,12 @@ package com.sksamuel.exts.concurrent
 
 import java.util.concurrent.{CountDownLatch, TimeUnit}
 
-import org.scalatest.{FunSuite, Matchers}
 
 import scala.util.{Failure, Success}
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
-class CancellableTest extends FunSuite with Matchers {
+class CancellableTest extends AnyFunSuite with Matchers {
 
   import scala.concurrent.ExecutionContext.Implicits.global
 

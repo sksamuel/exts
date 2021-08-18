@@ -1,8 +1,9 @@
 package com.sksamuel.exts.net
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class UrlParamParserTest extends WordSpec with Matchers {
+class UrlParamParserTest extends AnyWordSpec with Matchers {
 
   "UrlParamParser" should {
     "parse params" in {

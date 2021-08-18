@@ -1,9 +1,10 @@
 package com.sksamuel.exts.pagination
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 /** @author Stephen Samuel */
-class PagedResultTest extends WordSpec with Matchers {
+class PagedResultTest extends AnyWordSpec with Matchers {
 
   "PagedResult.apply" should {
     "use results for size" in {

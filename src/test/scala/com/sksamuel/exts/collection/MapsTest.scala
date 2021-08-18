@@ -1,8 +1,9 @@
 package com.sksamuel.exts.collection
 
-import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
-class MapsTest extends FunSuite with Matchers {
+class MapsTest extends AnyFunSuite with Matchers {
 
   test("Maps.flatten should merge keys") {
     val map = Map("a" -> "b", "c" -> Map("d" -> "e", "f" -> "g"))
